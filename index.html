@@ -1,111 +1,330 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<title>bruh</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-  }
+    <meta charset="UTF-8">
+    <title>bruh</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
-  .search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background-color: #FFF;
-    border-radius: 24px;
-    filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.1));
-    justify-content: center;
-    padding: 10px;
-}
+        .topnav {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            position: fixed;
+            width: 98%;
+            z-index: 1000;
+            border-radius: 15px;
+            filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.1));
+            opacity: 95%;
+            align-items: center;
+        }
 
-.search-container input {
-    border: none;
-    outline: none;
-    font-size: 15px;
-    transition: all 0.5s ease;
-    width: 0;
-    background: none;
-    cursor: pointer;
-    padding-left: 0;
-}
+        .topnav img {
+            display: flex;
+            margin-top: auto;
+            margin-bottom: auto;
+            padding-top: 3%;
+            padding-bottom: 3%;
+        }
 
-.material-symbols-outlined {
-    transform: translateX(10%);
-}
-</style>
+        .topnav a {
+            float: left;
+            display: block;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 3px 16px;
+            text-decoration: none;
+            font-size: 28px;
+            line-height: 50px;
+            transition: color 0.5s;
+        }
+
+        .topnav a:hover {
+            opacity: 0.8;
+            color: lightskyblue;
+        }
+
+        .topnav a:active,
+        .topnav a:focus {
+            color: white;
+        }
+
+        .underline {
+            position: absolute;
+            height: 3px;
+            background: grey;
+            width: 0;
+            transition: all 0.5s;
+            border-radius: 3px;
+            bottom: 0px;
+            opacity: 0.7;
+        }
+
+        .icon {
+            display: block;
+            cursor: pointer;
+            float: right;
+            color: black;
+            transform: translateY(5%);
+            position: relative;
+            padding: 12px;
+        }
+
+        .icon {
+            position: absolute;
+            right: 0;
+            bottom: 8px;
+        }
+
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: black;
+            margin: 20% 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            transform: rotate(-45deg) translate(-9px, 8px);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
+
+        .serch-box {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 24px;
+            filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.1));
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            transform: translateY(250%);
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            font-size: 15px;
+            transition: all 0.5s ease;
+            width: 0;
+            background: none;
+            cursor: pointer;
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .material-symbols-outlined {
+            transform: translateX(10%);
+        }
+
+        @media screen and (min-width: 651px) {
+            .topnav a:not(:first-child) {
+                display: block;
+            }
+
+            .topnav a.icon {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            .topnav {
+                justify-content: center;
+            }
+
+            .topnav a#logo-lnk {
+                display: block;
+            }
+
+            .topnav a {
+                display: none;
+            }
+
+            .topnav a.icon {
+                float: right;
+                display: block;
+                color: #f2f2f2;
+            }
+
+            .topnav.responsive a.icon {
+                position: fixed;
+                right: 0;
+                top: 0;
+            }
+
+            .topnav.responsive a {
+                float: none;
+                display: block;
+                text-align: center;
+            }
+
+            .topnav a {
+                font-size: 30px;
+            }
+
+            .underline {
+                display: none;
+            }
+
+            .topnav.responsive {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="search-container" id="searchContainer">
-    <span class="material-symbols-outlined">
-        search
-    </span>
-    <input type="text" name="search" placeholder="Serch for...">
-  </div>
-<script>
-    document.addEventListener('click', function(event) {
-        var searchContainer = document.getElementById('searchContainer');
-        var inputField = searchContainer.querySelector('input');
-        if (!searchContainer.contains(event.target)) {
-          inputField.style.width = '0';
-          inputField.blur();
-        } else if (event.target === inputField) {
-          inputField.style.width = '200px';
-        }
-    });
+    <div class="topnav" id="Topnav">
+        <a href="/" id="logo-lnk">aa
+        </a>
+        <div id="nav-links">
+            <a class="link" href="/">ホーム</a>
+            <a class="link" href="/profile/Bio">会社案内</a>
+        </div>
+        <div class="underline" id="underline"></div>
+        <a href="javascript:void(0);" class="icon" onclick="menu()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </a>
+    </div>
+    <div class="serch-box">
+        <div class="search-container" id="searchContainer">
+            <span class="material-symbols-outlined">
+                search
+            </span>
+            <input type="text" name="search" placeholder="Serch for...">
+        </div>
+    </div>
+    <script>
+        function menu() {
+            var underline = document.getElementById('underline');
+            var links = document.querySelectorAll('.topnav a');
 
-    document.getElementById('searchContainer').addEventListener('mouseover', function(event) {
-        var searchContainer = document.getElementById('searchContainer');
-        var inputField = searchContainer.querySelector('input');
-        inputField.style.width = '40vw';
-    });
-  
-    document.getElementById('searchContainer').addEventListener('mouseleave', function(event) {
-        var searchContainer = document.getElementById('searchContainer');
-        var inputField = searchContainer.querySelector('input');
-        inputField.style.width = '0';
-        inputField.blur();
-    });
+            links.forEach(function (link) {
+                link.addEventListener('mouseenter', function (e) {
+                    underline.style.width = e.target.offsetWidth + 'px';
+                    underline.style.left = e.target.offsetLeft + 'px';
+                });
 
-    const inputField = document.querySelector('.search-container input');
-    let dotCount = 0;
-    let increasing = true;
+                link.addEventListener('mouseleave', function (e) {
+                    underline.style.width = '0';
+                    underline.style.left = e.target.offsetLeft + 'px';
+                });
+            });
 
-    function animatePlaceholder() {
-        const dots = '.'.repeat(dotCount);
-        inputField.setAttribute('placeholder', `Serch for${dots}`);
-
-        if (increasing) {
-            dotCount++;
-            if (dotCount === 6) {
-                increasing = false;
+            var x = document.getElementById("Topnav");
+            var icon = document.querySelector(".icon");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+                icon.classList.add("change");
+            } else {
+                x.className = "topnav";
+                icon.classList.remove("change");
             }
-        } else {
-            dotCount--;
-            if (dotCount === 0) {
-                increasing = true;
+        }
+
+        document.addEventListener('click', function (event) {
+            var searchContainer = document.getElementById('searchContainer');
+            var inputField = searchContainer.querySelector('input');
+            if (!searchContainer.contains(event.target)) {
+                inputField.style.width = '0';
+                inputField.blur();
+            } else if (event.target === inputField) {
+                inputField.style.width = '40vw';
+            }
+        });
+
+        document.getElementById('searchContainer').addEventListener('mouseover', function (event) {
+            var searchContainer = document.getElementById('searchContainer');
+            var inputField = searchContainer.querySelector('input');
+            inputField.style.width = '40vw';
+        });
+
+        document.getElementById('searchContainer').addEventListener('mouseleave', function (event) {
+            var searchContainer = document.getElementById('searchContainer');
+            var inputField = searchContainer.querySelector('input');
+            inputField.style.width = '0';
+            inputField.blur();
+        });
+
+        const inputField = document.querySelector('.search-container input');
+        let dotCount = 0;
+        let increasing = true;
+
+        function animatePlaceholder() {
+            const dots = '.'.repeat(dotCount);
+            inputField.setAttribute('placeholder', `Serch for${dots}`);
+
+            if (increasing) {
+                dotCount++;
+                if (dotCount === 6) {
+                    increasing = false;
+                }
+            } else {
+                dotCount--;
+                if (dotCount === 0) {
+                    increasing = true;
+                }
             }
         }
-    }
 
-    setInterval(animatePlaceholder, 500);
+        setInterval(animatePlaceholder, 200);
 
-    let originalTitle = document.title;
+        let originalTitle = document.title;
 
-    function handleVisibilityChange() {
-        if (document.visibilityState === 'hidden') {
-            document.title = '行かないで; ;';
-        } else {
-            document.title = originalTitle;
+        function handleVisibilityChange() {
+            if (document.visibilityState === 'hidden') {
+                document.title = '行かないで; ;';
+            } else {
+                document.title = originalTitle;
+            }
         }
-    }
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-</script>
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        window.onload = function () {
+            links.forEach(function (link) {
+                link.addEventListener('mouseenter', function (e) {
+                    underline.style.width = e.target.offsetWidth + 'px';
+                    underline.style.left = e.target.offsetLeft + 'px';
+                });
+
+                link.addEventListener('mouseleave', function (e) {
+                    underline.style.width = '0';
+                    underline.style.left = e.target.offsetLeft + 'px';
+                });
+            });
+
+            var worksLink = document.querySelector('.topnav a[href="/"]');
+            underline.style.width = worksLink.offsetWidth + 'px';
+            underline.style.left = worksLink.offsetLeft + 'px';
+        };
+    </script>
 </body>
+
 </html>
